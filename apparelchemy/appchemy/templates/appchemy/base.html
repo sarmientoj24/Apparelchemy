@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static 'appchemy/main.css' %}">
+        <title>ApparelChemy</title>
+    </head>
+    <body>
+            <header>
+                <div class="navbar navbar-dark bg-dark shadow-sm">
+                    <div class="container d-flex justify-content-between">
+                        <a href="#" class="navbar-brand d-flex align-items-center">
+                            <strong>Apparelchemy</strong>
+                        </a>
+                    </div>
+                </div>
+            </header>
+            <main role="main">
+                {% block content %}{% endblock %}
+            </main>
+        <!-- Optional Javascript Here -->
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="{% static 'appchemy/main.js' %}" type="text/javascript" language="javascript"></script>
+        
+        <script>
+            // Functions
+            function updateTweakedImage(image_name) {
+                var canvas = document.getElementById("gencanvas");
+                var ctx = canvas.getContext("2d");
+
+                var image = new Image();
+                image.onload = function() {
+                    ctx.drawImage(image, 0, 0, 180, 240);
+                };
+                    image.src = image_name;
+            }
+
+            $( document ).ready(function() {
+                var z_randoms = {{ json_list | safe }}; 
+                for (i = 0; i < z_randoms.length; i++) {
+                    console.log(z_randoms[i])
+                    var name_slider = "slider" + (i + 1)
+                    document.getElementById(name_slider).value = z_randoms[i];
+                }
+                //console.log({{ first_img }})
+                
+            });
+            $(".slidecontainer > div.row >.slider").on("change mousemove", function() {
+                x = getSliderValues();
+                $.ajax({
+                    url: '{% url "appchemy-check" %}',
+                    data: {
+                        'z_0': x[0],
+                        'z_1': x[1],
+                        'z_2': x[2],
+                        'z_3': x[3],
+                        'z_4': x[4],
+                        'z_5': x[5],
+                        'z_6': x[6],
+                        'z_7': x[7],
+                        'z_8': x[8],
+                        'z_9': x[9],
+                        'z_10': x[10],
+                        'z_11': x[11],
+                        'z_12': x[12],
+                        'z_13': x[13],
+                        'z_14': x[14],
+                        'z_15': x[15],
+                        'x_': x
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        updateTweakedImage(data.image_encoded);
+                    }
+                });
+            });
+
+            $("#recommend").on("click", function() {
+                x = getSliderValues();
+                $.ajax({
+                    url: '{% url "appchemy-recommend" %}',
+                    data: {
+                        'z_0': x[0],
+                        'z_1': x[1],
+                        'z_2': x[2],
+                        'z_3': x[3],
+                        'z_4': x[4],
+                        'z_5': x[5],
+                        'z_6': x[6],
+                        'z_7': x[7],
+                        'z_8': x[8],
+                        'z_9': x[9],
+                        'z_10': x[10],
+                        'z_11': x[11],
+                        'z_12': x[12],
+                        'z_13': x[13],
+                        'z_14': x[14],
+                        'z_15': x[15]
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        $("#nearest").attr("src", "{% static 'appchemy/imgs/' %}" + data.most_similar);
+                        $("#similar1").attr("src", "{% static 'appchemy/imgs/' %}" + data.similar1);
+                        $("#similar2").attr("src", "{% static 'appchemy/imgs/' %}" + data.similar2);
+                        $("#similar3").attr("src", "{% static 'appchemy/imgs/' %}" + data.similar3);
+                        $("#reco1").attr("src", "{% static 'appchemy/imgs/' %}" + data.reco1);
+                        $("#reco2").attr("src", "{% static 'appchemy/imgs/' %}" + data.reco2);
+                        $("#reco3").attr("src", "{% static 'appchemy/imgs/' %}" + data.reco3);
+                        $("#reco4").attr("src", "{% static 'appchemy/imgs/' %}" + data.reco4);
+                        
+                        
+                    }
+                });
+            });
+
+            
+
+            function getSliderValues() {
+                values = []
+                $(".slidecontainer > div.row >.slider").each(function () {
+                    values.push(parseFloat($(this).val()));
+                });
+                console.log(values)
+                return values;
+            }
+
+        </script>
+    </body>
+</html>

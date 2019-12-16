@@ -1,0 +1,152 @@
+{% extends "appchemy/base.html" %}
+{% block content %}
+{% load static %}
+<div class="container">
+    <div class="row justify-content-md-center pt-4 pb-1">
+        <div class="col col-lg-3 justify-content-md-center">
+            <div class="row justify-content-md-center">
+                <h4>Generated Image</h4>
+            </div>
+            <div class="row">
+                <canvas src="" id="gencanvas" 
+                width="240" height="320" style="position: absolute; border: 2px solid black; background-color: white" 
+                class="genimg" alt=""></canvas>
+            </div>
+        </div>
+        <div class="col col-lg-5 justify-content-md-center">
+            <div class="col col-lg-12">
+                <div class="row pt-1 pb-1  justify-content-md-center">
+                    <h4>Latent Code</h4>
+                </div>
+            </div>
+            <div class="row justify-content-md-center pt-1 pb-1">
+                <div class="col slidecontainer container-fluid col-lg-5 mx-1">
+                    <div class="row pb-2">
+                        <input class="slider" id="slider1" type="range" min="-5" max="5" step=0.0001 />
+                    </div>
+                    <div class="row pb-2">
+                        <input class="slider" id="slider2" type="range" min="-5" max="5" step=0.0001 />
+                    </div>
+                    <div class="row pb-2">
+                        <input class="slider" id="slider3" type="range" min="-5" max="5" step=0.0001 />
+                    </div>
+                    <div class="row pb-2">
+                        <input class="slider" id="slider4" type="range" min="-5" max="5" step=0.0001 />
+                    </div>
+                    <div class="row pb-2">
+                        <input class="slider" id="slider5" type="range" min="-5" max="5" step=0.0001 />
+                    </div>
+                    <div class="row pb-2">
+                        <input class="slider" id="slider6" type="range" min="-5" max="5" step=0.0001 />
+                    </div>
+                    <div class="row pb-2">
+                        <input class="slider" id="slider7" type="range" min="-5" max="5" step=0.0001 />
+                    </div>
+                    <div class="row pb-2">
+                        <input class="slider" id="slider8" type="range" min="-5" max="5" step=0.0001 />
+                    </div>
+                </div>
+                <div class="col slidecontainer container-fluid col-lg-5 mx-1">
+                    <div class="row pb-2">
+                        <input class="slider" id="slider9" type="range" min="-5" max="5" step=0.0001 />
+                    </div>
+                    <div class="row pb-2">
+                        <input class="slider" id="slider10" type="range" min="-5" max="5" step=0.0001 />
+                    </div>
+                    <div class="row pb-2">
+                        <input class="slider" id="slider11" type="range" min="-5" max="5" step=0.0001 />
+                    </div>
+                    <div class="row pb-2">
+                        <input class="slider" id="slider12" type="range" min="-5" max="5" step=0.0001 />
+                    </div>
+                    <div class="row pb-2">
+                        <input class="slider" id="slider13" type="range" min="-5" max="5" step=0.0001 />
+                    </div>
+                    <div class="row pb-2">
+                        <input class="slider" id="slider14" type="range" min="-5" max="5" step=0.0001 />
+                    </div>
+                    <div class="row pb-2">
+                        <input class="slider" id="slider15" type="range" min="-5" max="5" step=0.0001 />
+                    </div>
+                    <div class="row pb-2">
+                        <input class="slider" id="slider16" type="range" min="-5" max="5" step=0.0001 />
+                    </div>
+                </div>
+                    <!--<h5>{{ product.name }}</h5>-->
+            </div>
+        </div>
+        
+        <div class="col col-lg-3">
+            <div class="row justify-content-md-center">
+                <h4>Nearest Match</h4>
+            </div>
+            <div class="row justify-content-md-center pb-4">
+                <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                    <div class="card-header">
+                        <p id="nearest_name"></p>
+                    </div>
+                    
+                    <div class="card-deck">
+                            <div class="card border-primary">
+                                <img src="" id="nearest" class="card-img-top nearest" alt="">
+                            </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid pt-1 pb-1">
+    <div class="row pt-2 pb-2 justify-content-md-center">
+        <button class="btn btn-primary" id="recommend" type="submit">Recommend</button>
+    </div>
+</div>
+
+<div class="container-fluid bg-dark pt-4 pb-4">
+    <div class="row pt-2 pb-2 justify-content-md-center">
+        <div class="row">
+            <h4 class="text-white">You Might Like</h4>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="card-deck">
+            <div class="card border-primary mb-3">
+                <img src="" id="similar1" class="card-img-top recimg" alt="">
+            </div>
+            <div class="card border-primary mb-3">
+                <img src="" id="similar2" class="card-img-top recimg" alt="">
+            </div>
+            <div class="card border-primary mb-3">
+                <img src="" id="similar3" class="card-img-top recimg" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid pt-4 pb-4">
+    <div class="row justify-content-md-center pt-2 pb-2">
+        <div class="row">
+            <h4>Recommended</h4>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="card-deck">
+            <div class="card border-primary mb-3">
+                <img src="" id="reco1" class="card-img-top recimg2" alt="">
+            </div>
+            <div class="card border-info mb-3">
+                <img src="" id="reco2" class="card-img-top recimg2" alt="">
+            </div>
+            <div class="card border-info mb-3">
+                <img src="" id="reco3" class="card-img-top recimg2" alt="">
+            </div>
+            <div class="card border-info mb-3">
+                <img src="" id="reco4" class="card-img-top recimg2" alt="">
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
