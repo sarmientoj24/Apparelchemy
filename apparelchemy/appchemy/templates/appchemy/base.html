@@ -52,7 +52,7 @@
                 //console.log({{ first_img }})
                 
             });
-            $(".slidecontainer > div.row >.slider").on("change mousemove", function() {
+            $(".slidecontainer > div.row >.slider").on("change", function() {
                 x = getSliderValues();
                 $.ajax({
                     url: '{% url "appchemy-check" %}',
@@ -109,18 +109,14 @@
                         $("#nearest").attr("src", "{% static 'appchemy/imgs/' %}" + data.most_similar);
                         $("#similar1").attr("src", "{% static 'appchemy/imgs/' %}" + data.similar1);
                         $("#similar2").attr("src", "{% static 'appchemy/imgs/' %}" + data.similar2);
-                        $("#similar3").attr("src", "{% static 'appchemy/imgs/' %}" + data.similar3);
+                        //$("#similar3").attr("src", "{% static 'appchemy/imgs/' %}" + data.similar3);
                         $("#reco1").attr("src", "{% static 'appchemy/imgs/' %}" + data.reco1);
                         $("#reco2").attr("src", "{% static 'appchemy/imgs/' %}" + data.reco2);
-                        $("#reco3").attr("src", "{% static 'appchemy/imgs/' %}" + data.reco3);
-                        $("#reco4").attr("src", "{% static 'appchemy/imgs/' %}" + data.reco4);
-                        
-                        
+                        //$("#reco3").attr("src", "{% static 'appchemy/imgs/' %}" + data.reco3);
+                        //$("#reco4").attr("src", "{% static 'appchemy/imgs/' %}" + data.reco4);
                     }
                 });
             });
-
-            
 
             function getSliderValues() {
                 values = []
