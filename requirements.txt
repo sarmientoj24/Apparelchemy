@@ -51,7 +51,7 @@ olefile==0.45.1
 pandas==0.24.2
 pathlib==1.0.1
 persistent==4.5.0
-Pillow==5.1.0
+Pillow==9.0.1
 pipenv==2018.11.26
 plac==0.9.6
 preshed==2.0.1
